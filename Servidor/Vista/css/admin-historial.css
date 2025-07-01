@@ -1,0 +1,958 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+:root {
+  /* Mantenemos el color base de la barra lateral */
+  --color-barra-lateral: #c8b2b2;
+
+  /* Nuevos colores y efectos */
+  --color-texto: #2d2d2d;
+  --color-texto-menu: #4a4a4a;
+  --color-menu-hover: #b39c9c;
+  --color-menu-hover-texto: #ffffff;
+  --color-boton: #8c7575;
+  --color-boton-texto: #ffffff;
+  --color-linea: rgba(255, 255, 255, 0.2);
+  --color-scroll: rgba(255, 255, 255, 0.5);
+  --color-scroll-hover: rgba(255, 255, 255, 0.8);
+  --color-activo: #a58e8e;
+  --color-activo-glow: rgba(165, 142, 142, 0.4);
+  --color-sombra: rgba(0, 0, 0, 0.1);
+  --color-sombra-hover: rgba(0, 0, 0, 0.15);
+
+  /* Gradientes */
+  --gradient-sidebar: linear-gradient(135deg, #c8b2b2 0%, #d4c0c0 100%);
+  --gradient-active: linear-gradient(135deg, #a58e8e 0%, #b39c9c 100%);
+  --gradient-hover: linear-gradient(135deg, #b39c9c 0%, #c8b2b2 100%);
+  --gradient-header: linear-gradient(135deg, #8c7575 0%, #a58e8e 100%);
+
+  /* Nuevos colores para el contenido principal */
+  --color-fondo-principal: #f5f0ee;
+  --color-container-bg: rgba(165, 142, 142, 0.1);
+  --color-container-border: rgba(140, 117, 117, 0.2);
+  --color-table-bg: rgba(255, 255, 255, 0.9);
+  --color-table-header: linear-gradient(135deg, #a58e8e 0%, #b39c9c 100%);
+  --color-table-row-hover: rgba(200, 178, 178, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  width: 100%;
+  align-items: center;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-fondo-principal);
+}
+
+.container {
+  border: 2px solid var(--color-container-border);
+  background: var(--color-container-bg);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  color: var(--color-texto);
+  padding: 30px;
+  max-width: 100%;
+  min-height: 100vh;
+}
+
+h1 {
+  text-align: center;
+  color: var(--color-boton);
+  margin-bottom: 20px;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 15px;
+  font-size: 28px;
+}
+
+h1:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-boton), transparent);
+  border-radius: 3px;
+}
+
+/* Estilo para la fecha - MOVIDO A LA DERECHA */
+.fecha-historial {
+  text-align: left;
+  color: var(--color-texto);
+  font-size: 14px;
+  margin-bottom: 20px;
+  padding-left: 25px; /* Aumentado para mover a la derecha */
+  font-weight: 500;
+}
+
+/*Menu*/
+.menu {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: var(--color-boton);
+  color: var(--color-boton-texto);
+  right: 15px;
+  top: 15px;
+  z-index: 100;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+/*Barra lateral*/
+.barra-lateral {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 270px;
+  height: 100%;
+  overflow: hidden;
+  padding: 0 0 20px 0; /* Eliminamos el padding superior para el nuevo header */
+  background: var(--gradient-sidebar);
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 50;
+  border-right: 1px solid var(--color-linea);
+  box-shadow: 5px 0 15px var(--color-sombra);
+}
+
+.mini-barra-lateral {
+  width: 80px;
+}
+
+.barra-lateral span {
+  width: 100%;
+  white-space: nowrap;
+  font-size: 18px;
+  text-align: left;
+  opacity: 1;
+  transition: opacity 0.5s ease, width 0.5s ease;
+  color: var(--color-texto);
+  font-weight: 500;
+}
+
+.barra-lateral span.oculto {
+  opacity: 0;
+  width: 0;
+}
+
+/*Nombre de la Página - NUEVO DISEÑO*/
+.barra-lateral .nombre-pagina {
+  width: 100%;
+  height: auto;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-header);
+  padding: 25px 15px;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.barra-lateral .nombre-pagina::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+.barra-lateral .nombre-pagina::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+
+.barra-lateral .nombre-pagina .admin-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 0 5px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.barra-lateral .nombre-pagina .admin-icon:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25), 0 0 0 8px rgba(255, 255, 255, 0.15);
+}
+
+.barra-lateral .nombre-pagina span {
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+  padding-bottom: 5px;
+  text-align: center; /* Centrar el texto */
+  width: 100%; /* Asegurar que ocupe todo el ancho disponible */
+}
+
+.barra-lateral .nombre-pagina span::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+}
+
+/*Menu Navegación*/
+.barra-lateral .navegacion {
+  margin-left: 0;
+  padding: 0 15px;
+  width: 100%;
+}
+
+.barra-lateral .navegacion ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.barra-lateral .navegacion li {
+  margin-bottom: 15px;
+  width: 100%;
+  position: relative;
+}
+
+.barra-lateral .navegacion li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 0;
+  background: var(--gradient-active);
+  border-radius: 3px;
+  transition: height 0.3s ease;
+  opacity: 0;
+}
+
+.barra-lateral .navegacion li:hover::before {
+  height: 100%;
+  opacity: 1;
+}
+
+.barra-lateral .navegacion li:last-child {
+  margin-bottom: 15px;
+}
+
+.barra-lateral .navegacion a {
+  width: 100%;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 12px;
+  background-color: rgba(140, 117, 117, 0.15); /* Color de fondo sutil pero visible */
+  color: #333333; /* Color de texto más oscuro para mejor contraste */
+  padding-left: 15px;
+  padding-right: 15px;
+  box-shadow: 0 2px 4px var(--color-sombra);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+  position: relative;
+  text-align: left;
+  border-left: 3px solid rgba(140, 117, 117, 0.3); /* Borde izquierdo sutil */
+}
+
+.barra-lateral .navegacion a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-hover);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.barra-lateral .navegacion a:hover {
+  color: var(--color-menu-hover-texto);
+  box-shadow: 0 4px 8px var(--color-sombra-hover);
+  transform: translateY(-2px) translateX(3px);
+}
+
+.barra-lateral .navegacion a:hover::before {
+  opacity: 1;
+}
+
+.barra-lateral .navegacion i {
+  font-size: 20px;
+  margin-right: 15px;
+  flex-shrink: 0;
+  color: #4a3e3e; /* Color más oscuro para los iconos */
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.barra-lateral .navegacion a:hover i {
+  transform: scale(1.1);
+  color: var(--color-menu-hover-texto);
+}
+
+/* Asegurar que el texto dentro de los elementos de navegación esté alineado a la izquierda */
+.barra-lateral .navegacion span {
+  text-align: left;
+}
+
+/* Estilo para el botón activo */
+#historial {
+  background: var(--gradient-active);
+  color: white;
+  box-shadow: 0 4px 15px var(--color-activo-glow);
+  transform: translateX(5px);
+  border-left: 3px solid #8c7575; /* Borde más visible para el botón activo */
+}
+
+#historial i {
+  color: white;
+}
+
+/* Efecto de ripple al hacer clic */
+.barra-lateral .navegacion a {
+  position: relative;
+  overflow: hidden;
+}
+
+.barra-lateral .navegacion a::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.barra-lateral .navegacion a:active::after {
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(20, 20);
+    opacity: 0;
+  }
+}
+
+/* Contenedor para el botón de cerrar sesión */
+.cerrar-sesion-container {
+  margin-top: auto;
+  margin-bottom: 20px;
+  padding: 0 15px;
+  width: 100%;
+  position: relative;
+}
+
+.cerrar-sesion-container::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 15px;
+  right: 15px;
+  height: 1px;
+  background: var(--gradient-active);
+  opacity: 0.3;
+}
+
+.cerrar-sesion-container a {
+  width: 100%;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 12px;
+  background-color: rgba(140, 117, 117, 0.15); /* Color de fondo sutil pero visible */
+  color: #333333; /* Color de texto más oscuro */
+  padding-left: 15px;
+  padding-right: 15px;
+  box-shadow: 0 2px 4px var(--color-sombra);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  border-left: 3px solid rgba(140, 117, 117, 0.3); /* Borde izquierdo sutil */
+}
+
+.cerrar-sesion-container a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #b39c9c 0%, #a58e8e 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.cerrar-sesion-container a:hover {
+  color: var(--color-menu-hover-texto);
+  box-shadow: 0 4px 8px var(--color-sombra-hover);
+  transform: translateY(-2px);
+}
+
+.cerrar-sesion-container a:hover::before {
+  opacity: 1;
+}
+
+.cerrar-sesion-container i {
+  font-size: 20px;
+  margin-right: 15px;
+  flex-shrink: 0;
+  color: #4a3e3e; /* Color más oscuro para el icono */
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.cerrar-sesion-container a:hover i {
+  transform: scale(1.1) rotate(-15deg);
+  color: var(--color-menu-hover-texto);
+}
+
+/* Efecto de ripple para cerrar sesión */
+.cerrar-sesion-container a::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.cerrar-sesion-container a:active::after {
+  animation: ripple 0.6s ease-out;
+}
+
+/*main*/
+main {
+  margin-left: 270px;
+  padding: 20px;
+  transition: margin-left 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background-color: var(--color-fondo-principal);
+}
+
+main.min-main {
+  margin-left: 80px;
+}
+
+/* Estilos para la tabla de historial */
+.table-responsive {
+  margin-top: 30px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background: var(--color-table-bg);
+  border: 1px solid var(--color-container-border);
+  position: relative;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: var(--color-texto);
+  table-layout: fixed; /* Añadido para control de columnas */
+}
+
+/* Definir anchos específicos para las columnas */
+table th:nth-child(1),
+table td:nth-child(1) {
+  width: 20%; /* Columna HORA */
+}
+
+table th:nth-child(2),
+table td:nth-child(2) {
+  width: 50%; /* Columna ESTADO */
+}
+
+table th:nth-child(3),
+table td:nth-child(3) {
+  width: 30%; /* Columna ACCIÓN */
+}
+
+table thead {
+  background: var(--color-table-header);
+}
+
+table th {
+  padding: 18px 15px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(140, 117, 117, 0.2);
+  position: relative;
+  color: white;
+}
+
+table th:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+table tbody tr {
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(140, 117, 117, 0.1);
+}
+
+table tbody tr:last-child {
+  border-bottom: none;
+}
+
+table tbody tr:hover {
+  background: var(--color-table-row-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+table td {
+  padding: 15px;
+  vertical-align: middle;
+  font-size: 14px;
+  position: relative;
+  overflow: hidden;
+  color: var(--color-texto);
+  text-align: center;
+}
+
+/* Alineación específica para la primera columna (hora/fecha) */
+table td:first-child {
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Centrar botones de acción - MEJORADO */
+table td:last-child {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Asegurar que los botones estén perfectamente centrados */
+table td:last-child .ver-alerta,
+table td:last-child .btn-ver {
+  margin: 0 auto;
+  display: inline-block;
+}
+
+/* Estilos para los estados */
+.estado-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.estado-atendido,
+.btn-success {
+  background: rgba(40, 167, 69, 0.1) !important;
+  color: #28a745 !important;
+  border: 1px solid rgba(40, 167, 69, 0.3) !important;
+}
+
+.estado-pendiente,
+.btn-danger {
+  background: rgba(220, 53, 69, 0.1) !important;
+  color: #dc3545 !important;
+  border: 1px solid rgba(220, 53, 69, 0.3) !important;
+}
+
+.estado-proceso,
+.btn-warning {
+  background: rgba(255, 193, 7, 0.1) !important;
+  color: #ffc107 !important;
+  border: 1px solid rgba(255, 193, 7, 0.3) !important;
+}
+
+.estado-cancelado {
+  background: rgba(108, 117, 125, 0.1);
+  color: #6c757d;
+  border: 1px solid rgba(108, 117, 125, 0.3);
+}
+
+/* Estilos para los botones de acción */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.btn-action,
+.ver-alerta {
+  border: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+}
+
+.btn-action i,
+.ver-alerta i {
+  margin-right: 5px;
+  font-size: 16px;
+}
+
+.btn-ver,
+.ver-alerta {
+  background: linear-gradient(135deg, #c8b2b2 0%, #d4c0c0 100%);
+  color: #4a3e3e;
+}
+
+.btn-ver:hover,
+.ver-alerta:hover {
+  background: linear-gradient(135deg, #d4c0c0 0%, #e0d0d0 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  color: #333333;
+}
+
+/* Estilos para el modal */
+.modal-content {
+  background: white;
+  border: 1px solid rgba(140, 117, 117, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+  background: var(--color-table-header);
+  color: white;
+  border-bottom: none;
+  border-radius: 15px 15px 0 0;
+  padding: 20px 25px;
+}
+
+.modal-title {
+  color: white;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.modal-body {
+  padding: 25px;
+  color: var(--color-texto);
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(140, 117, 117, 0.1);
+  padding: 20px 25px;
+}
+
+.btn-close {
+  color: white;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.btn-close:hover {
+  opacity: 1;
+  transform: rotate(90deg);
+}
+
+/* Estilos específicos para el historial */
+.alertas-container {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.alertas-container li {
+  background-color: var(--color-table-bg);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border: 1px solid var(--color-container-border);
+}
+
+.alertas-container li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.data {
+  font-weight: 600;
+  color: var(--color-texto);
+  margin-bottom: 8px;
+}
+
+.descripcion {
+  font-size: 15px;
+  color: var(--color-texto);
+  margin-bottom: 10px;
+}
+
+.sintomas {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.estado {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.estado.Pendiente {
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+  border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+.estado.Resuelto,
+.estado.Atendido {
+  background: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+  border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.estado.Proceso,
+.estado.En.proceso {
+  background: rgba(255, 193, 7, 0.1);
+  color: #ffc107;
+  border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.estado.Cancelado {
+  background: rgba(108, 117, 125, 0.1);
+  color: #6c757d;
+  border: 1px solid rgba(108, 117, 125, 0.3);
+}
+
+/* Animación de carga */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(245, 240, 238, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(140, 117, 117, 0.1);
+  border-radius: 50%;
+  border-top-color: #a58e8e;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animación de entrada para el modal */
+.modal.fade .modal-dialog {
+  transform: scale(0.9);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal.show .modal-dialog {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/*Responsive*/
+@media (max-height: 660px) {
+  .barra-lateral .nombre-pagina {
+    padding: 15px;
+  }
+
+  .barra-lateral .nombre-pagina .admin-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 768px) {
+  .table-responsive {
+    margin-top: 20px;
+  }
+
+  table th,
+  table td {
+    padding: 12px 10px;
+    font-size: 13px;
+  }
+
+  .btn-action {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .estado-badge {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 600px) {
+  .barra-lateral {
+    position: fixed;
+    left: -270px;
+  }
+  .max-barra-lateral {
+    left: 0;
+  }
+  .menu {
+    display: flex;
+  }
+  .menu i:nth-child(2) {
+    display: none;
+  }
+  main {
+    margin-left: 0;
+  }
+  main.min-main {
+    margin-left: 0;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  .table-responsive table {
+    width: 100%;
+    min-width: 600px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .action-buttons {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .btn-action {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+}
+
+/* Mejorar espaciado de secciones - MOVIDO A LA DERECHA */
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-boton);
+  margin: 30px 0 15px 0;
+  padding-left: 25px; /* Aumentado para mover a la derecha */
+}
+
+/* Mejorar espaciado entre tablas */
+.table-responsive + .section-title {
+  margin-top: 40px;
+}
+
+/* Estilos específicos para elementos que aparecen en el HTML generado dinámicamente */
+/* Esto asegura que cualquier texto que aparezca fuera de las tablas esté bien posicionado */
+.container > p,
+.container > div:not(.table-responsive) {
+  padding-left: 25px;
+  margin-bottom: 15px;
+}
+
+/* Estilo específico para "Alertas Canceladas" y fechas */
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding-left: 25px;
+  color: var(--color-boton);
+  font-weight: 600;
+  margin: 25px 0 15px 0;
+}

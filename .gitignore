@@ -1,0 +1,37 @@
+# Archivos y carpetas del sistema
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Archivos de logs y temporales
+*.log
+*.tmp
+*.swp
+
+# Archivos de entorno y configuración local
+.env
+.env.*
+
+# Archivos de bases de datos locales
+*.sqlite
+*.sqlite3
+*.db
+*.sql
+
+# Archivos de caché
+.cache/
+node_modules/
+vendor/
+
+# Archivos de correo y PHPMailer
+Mail/phpmailer/test_output/
+
+# Archivos de sistema de Windows
+$RECYCLE.BIN/
+*.bak
+
+# Otros
+.idea/
+.vscode/
+*.bak
+*.old 

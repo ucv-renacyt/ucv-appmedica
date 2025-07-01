@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Emergencias</title>
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/r-emergencia.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="menu">
+        <i class='bx bx-menu'></i>
+        <i class='bx bx-x'></i>
+    </div>
+    <div class="barra-lateral">
+            <div>
+                <div class="nombre-pagina">
+                    <img src="img/ucvdoc.ico" alt="logo">
+                    <span>CLIENTE</span>
+                    <div></div>
+                </div>
+            </div>
+            <nav class="navegacion">
+                <div class="arriba">
+                    <ul>
+                        <li>
+                            <a id="alerta" href="main.html">
+                                <img src="img/alert-triangle-svgrepo-com.ico" alt="alerta">
+                                <span>Alerta Médica</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="perfil" href="perfil.html">
+                                <img src="img/user-svgrepo-com.ico" alt="perfil">
+                                <span>Perfil</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" id="registro-emergencia" href="registro-emergencia.html">
+                                <img src="img/license-svgrepo-com.ico" alt="registro">
+                                <span>Registro de Emergencia</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" id="historial" href="historial.html">
+                                <img src="img/clock-svgrepo-com.ico" alt="historial">
+                                <span>Historial</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="abajo">
+                        <a href="../Controlador/cerrarSesion.php">
+                            <img src="img/logout-svgrepo-com.ico" alt="salir">
+                            <span>Cerrar Sesión</span>
+                        </a>
+                </div>
+            </nav>
+        </div>
+    
+    <main>
+        <div class="container">
+            <h1>Registro de Emergencias</h1>
+            <div id="tabla-emergencias" class="table-responsive">
+                <!-- La tabla se cargará aquí -->
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="alertaModal" tabindex="-1" aria-labelledby="alertaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="alertaModalLabel">Detalles de la Alerta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Contenido del modal -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal de confirmación para cancelar alerta -->
+    <div class="modal" id="confirmacionModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar Cancelación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que deseas cancelar esta alerta?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmarCancelacion">Confirmar Cancelación</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal de Confirmación -->
+    <div class="modal fade" id="mensajeModal" tabindex="-1" aria-labelledby="mensajeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="mensajeModalLabel">Mensaje</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <p id="mensajeModalTexto"></p>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="/Cliente/Vista/js/r-emergencia.js"></script>
+    <script src="/Cliente/Vista/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(90deg, #c8b2b2, #665660); /* Gradiente lineal a 90° */
+  background-size: cover;
+  background-position: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  max-width: 1200px; /* Limitar el ancho máximo para pantallas grandes */
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.col-md-6 {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+/* Avatar como elemento independiente a la derecha */
+.col-md-6::after {
+  content: "";
+  position: absolute;
+  right: -190px; /* Posición a la derecha */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 350px;
+  height: 350px;
+  background-image: url('../img/favicon.ico');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  margin: 20px;
+  margin-right: 220px; /* Margen a la derecha para dejar espacio para el avatar */
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 30px 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  right: 100px;
+}
+
+.card {
+  border: none;
+  box-shadow: none;
+  width: 100%;
+}
+
+.card-body {
+  padding: 0;
+}
+
+.card-title {
+  font-size: 28px;
+  text-align: center;
+  color: #333333;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-family: "Poppins", sans-serif;
+  margin-top: 10px;
+}
+
+.form-label {
+  color: #000000;
+  margin-bottom: 8px;
+  display: block;
+  font-weight: 700;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 15px;
+  border: 2px solid #3e2500;
+  border-radius: 20px;
+  font-size: 16px;
+  color: #495057;
+  background-color: #fff;
+  transition: border-color 0.15s ease-in-out;
+  margin-bottom: 15px;
+}
+
+.form-control:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin: 15px 0;
+  align-items: center;
+}
+
+.remember-forgot label input {
+  accent-color: #000;
+  margin-right: 5px;
+}
+
+.remember-forgot a {
+  color: #b8860b; /* Color dorado para el enlace de olvidó contraseña */
+  text-decoration: none;
+  margin-left: 60px;
+}
+
+.remember-forgot a:hover {
+  text-decoration: underline;
+}
+
+.btn-primary {
+  width: 200px;
+  max-width: 70%;
+  padding: 12px;
+  background-color: #ffffff; /* Fondo blanco */
+  border: 2px solid #000000; /* Borde negro */
+  border-radius: 20px;
+  color: #b8860b; /* Texto dorado */
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+  text-transform: uppercase; /* Texto en mayúsculas */
+  margin: 30px auto 15px;
+  display: block;
+}
+
+.btn-primary:hover {
+  background-color: #f8f8f8;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* Estilos para el enlace de registro */
+.register-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.register-link p {
+  margin: 0;
+}
+
+.register-link p a {
+  color: #b8860b; /* Color dorado para el enlace */
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-link p a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos para la pantalla de carga */
+#loadingScreen {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  color: #b8860b; /* Color dorado para el spinner */
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .col-md-6::after {
+    right: -150px;
+    width: 300px;
+    height: 300px;
+  }
+  
+  .login-container {
+    margin-right: 180px;
+    right: 50px;
+  }
+}
+
+@media (max-width: 992px) {
+  .col-md-6::after {
+    right: -120px;
+    width: 250px;
+    height: 250px;
+  }
+  
+  .login-container {
+    margin-right: 150px;
+    max-width: 400px;
+    right: 30px;
+  }
+}
+
+/* Cambio principal: Avatar arriba en pantallas pequeñas */
+@media (max-width: 768px) {
+  body {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  
+  .container {
+    flex-direction: column;
+  }
+  
+  .row {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .col-md-6 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Eliminar el pseudo-elemento y crear un nuevo elemento real para el avatar */
+  .col-md-6::after {
+    display: none; /* Ocultar el pseudo-elemento */
+  }
+  
+  /* Añadir el avatar como un elemento real antes del formulario */
+  .col-md-6::before {
+    content: "";
+    width: 150px;
+    height: 150px;
+    background-image: url('../img/superAdminLogin.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    display: block;
+    order: -1; /* Asegura que aparezca primero */
+  }
+  
+  .login-container {
+    margin: 0 auto;
+    right: 0;
+    max-width: 90%;
+    width: 100%;
+    order: 1; /* Asegura que aparezca después del avatar */
+  }
+  
+  .btn-primary {
+    width: 80%;
+    margin: 20px auto 10px;
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .remember-forgot {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .col-md-6::before {
+    width: 130px;
+    height: 130px;
+    margin-bottom: 15px;
+  }
+  
+  .login-container {
+    max-width: 95%;
+    padding: 20px 15px;
+  }
+  
+  .card-title {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  .col-md-6::before {
+    width: 110px;
+    height: 110px;
+    margin-bottom: 10px;
+  }
+  
+  .login-container {
+    padding: 15px 10px;
+  }
+  
+  .card-title {
+    font-size: 20px;
+  }
+  
+  .form-control {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
