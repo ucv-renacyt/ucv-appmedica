@@ -19,7 +19,7 @@ Aplicación web para la gestión de alertas médicas y usuarios en la Universida
 
 1. Clona este repositorio:
    ```bash
-   git clone https://github.com/tu-usuario/APP-Medica-UCV.git
+   git clone https://github.com/xavierdev25/ucv-appmedica.git
    ```
 2. Configura la base de datos usando el archivo `APP MÉDICA UCV - BD.txt`.
 3. Configura los archivos de conexión en `Cliente/Modelo/conexion.php` y `Servidor/Modelo/config.php`.
@@ -99,14 +99,6 @@ Aplicación web para la gestión de alertas médicas y usuarios en la Universida
    git add .
    git commit -m "Primer commit"
    git branch -M main
-   git remote add origin https://github.com/tu-usuario/APP-Medica-UCV.git
+   git remote add origin https://github.com/xavierdev25/ucv-appmedica.git
    git push -u origin main
    ```
-
-## Contribuciones
-
-¡Las contribuciones son bienvenidas! Abre un issue o pull request para sugerencias o mejoras.
-
-## Licencia
-
-Este proyecto es solo para fines académicos.
