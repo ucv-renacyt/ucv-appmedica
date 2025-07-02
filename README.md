@@ -1,6 +1,6 @@
 # APP MÉDICA UCV
 
-Aplicación web para la gestión de alertas médicas y usuarios en la Universidad Central de Venezuela.
+Aplicación web para la gestión de alertas médicas y usuarios en la Universidad César Vallejo.
 
 ## Estructura del Proyecto
 
