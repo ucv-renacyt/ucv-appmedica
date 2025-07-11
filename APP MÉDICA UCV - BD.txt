@@ -1,9 +1,3 @@
--- Creación de la base de datos si aún no existe
---CREATE DATABASE IF NOT EXISTS appmedica;
-
--- Usar la base de datos appmedica
---USE appmedica;
-
 -- Tabla roles
 CREATE TABLE IF NOT EXISTS roles (
     id_rol INT(11) NOT NULL AUTO_INCREMENT,
@@ -22,6 +16,10 @@ CREATE TABLE IF NOT EXISTS tipoacceso (
     PRIMARY KEY (id_tipo)
 );
 
+-- Insertar tipos de acceso básicos
+INSERT INTO tipoacceso (nombre) VALUES ('Activo');
+INSERT INTO tipoacceso (nombre) VALUES ('Inactivo');
+
 -- Tabla usuarios
 CREATE TABLE IF NOT EXISTS usuarios (
     id_usuario INT(11) NOT NULL AUTO_INCREMENT,
@@ -33,7 +31,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     carrera VARCHAR(150) NOT NULL,
     correo_institucional VARCHAR(200) NOT NULL,
     clave VARCHAR(80) NOT NULL,
-    estado INT(11) NOT NULL,
+    estado INT(11) NOT NULL DEFAULT 1,  -- Estado por defecto: activo (1)
     token VARCHAR(255) NOT NULL,
     id_rol INT(11) NOT NULL,
     PRIMARY KEY (id_usuario),
@@ -49,7 +47,7 @@ CREATE TABLE IF NOT EXISTS alertas (
     descripcion TEXT NOT NULL,
     sintomas TEXT NOT NULL,
     notas TEXT,
-    fecha_hora DATETIME NOT NULL DEFAULT current_timestamp(),
+    fecha_hora DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     id_usuario INT(11) NOT NULL,
     PRIMARY KEY (id_alerta),
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)

@@ -2,7 +2,7 @@
 $hostname = "localhost";
 $dbname = "appmedica";
 $username = "root";
-$password = "";
+$password = "root";
 
 // Conexión a la base de datos
 try {

@@ -12,9 +12,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-image: url('/Cliente/Vista/img/fondo.webp');
-  background-size: cover;
-  background-position: center;
+  background: #000000;
 }
 
 .wrapper {

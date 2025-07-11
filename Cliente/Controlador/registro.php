@@ -2,7 +2,7 @@
 session_start();
 include "../Modelo/conexion.php";
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Capturar y validar los datos del formulario
     $username = trim(filter_var($_POST['username'], FILTER_SANITIZE_STRING));
     $apellido_paterno = trim(filter_var($_POST['apellido_paterno'], FILTER_SANITIZE_STRING));
@@ -41,12 +41,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // El rol predeterminado del usuario es el id 1
             $id_rol = 1;
 
+            // Generar un token único
+            $token = bin2hex(random_bytes(16)); // Genera un token único de 32 caracteres
+
             // Iniciar una transacción
             $db->beginTransaction();
 
             // Preparar la consulta SQL para insertar datos
-            $sql = "INSERT INTO usuarios (nombre, apellido_paterno, apellido_materno, carrera, correo_institucional, clave, id_rol) 
-                    VALUES (:username, :apellido_paterno, :apellido_materno, :carrera, :email, :hashed_password, :id_rol)";
+            $sql = "INSERT INTO usuarios (nombre, apellido_paterno, apellido_materno, carrera, correo_institucional, clave, id_rol, token) 
+                    VALUES (:username, :apellido_paterno, :apellido_materno, :carrera, :email, :hashed_password, :id_rol, :token)";
 
             try {
                 $stmt = $db->prepare($sql);
@@ -57,8 +60,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $stmt->bindParam(':email', $email);
                 $stmt->bindParam(':hashed_password', $hashed_password);
                 $stmt->bindParam(':id_rol', $id_rol);
+                $stmt->bindParam(':token', $token); // Asigna el valor del token
                 $stmt->execute();
-                
+
                 // Obtener el ID del usuario recién insertado
                 $id_usuario = $db->lastInsertId();
 
@@ -75,7 +79,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                 // Confirmar la transacción
                 $db->commit();
-                
+
                 // Generar código OTP
                 $otp = rand(100000, 999999);
 
@@ -148,12 +152,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 
 function showErrorAlert($message) {
+    // Asegurarse de que las comillas sean correctas
+    $message = addslashes($message); // Escapa las comillas en el mensaje
     echo "<script>alert('". $message. "'); window.location.replace('../Vista/registro.html');</script>";
     exit();
 }
 
 function showSuccessAlert($message, $redirectUrl) {
+    // Asegurarse de que las comillas sean correctas
+    $message = addslashes($message); // Escapa las comillas en el mensaje
     echo "<script>alert('". $message. "'); window.location.replace('" . $redirectUrl . "');</script>";
     exit();
 }
+
 ?>
