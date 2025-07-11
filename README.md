@@ -21,10 +21,16 @@ Aplicación web para la gestión de alertas médicas y usuarios en la Universida
    ```bash
    git clone https://github.com/ucv-renacyt/ucv-appmedica.git
    ```
-2. Configura la base de datos usando el archivo `APP MÉDICA UCV - BD.txt`.
-3. Configura los archivos de conexión en `Cliente/Modelo/conexion.php` y `Servidor/Modelo/config.php`.
-4. Coloca el proyecto en tu servidor web local.
+2. Abre tu administrador de bases de datos PHPMyAdmin
+3. Crea una nueva base de datos, por ejemplo: appmedica.
+4. Importa el archivo APP MÉDICA UCV - BD.txt que se encuentra dentro del repositorio clonado.
+5. Configura los archivos de conexión en `Cliente/Modelo/conexion.php` y `Servidor/Modelo/config.php`.
+6. Si usas XAMPP, coloca la carpeta del proyecto (ucv-appmedica) en la carpeta C:/xampp/htdocs/.
 
+# Acceder al proyecto desde el navegador
+   ```bash
+http://localhost/ucv-appmedica/
+```
 ## Base de Datos
 
 ### Estructura de Tablas
