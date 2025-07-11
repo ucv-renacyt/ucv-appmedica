@@ -63,13 +63,27 @@ try {
         }
 
         // Imagen (si aplica)
-        $img_perfil = null;
         if (isset($_FILES['fotoPerfil']) && $_FILES['fotoPerfil']['error'] === 0) {
             $nombreArchivo = basename($_FILES['fotoPerfil']['name']);
             $rutaTemporal = $_FILES['fotoPerfil']['tmp_name'];
-            $rutaDestino = "../../Cliente/Vista/img/perfiles/" . $nombreArchivo;
-            move_uploaded_file($rutaTemporal, $rutaDestino);
-            $img_perfil = $rutaDestino;
+
+            // Establecer la ruta de destino dentro de la carpeta "img/perfiles/"
+            $rutaDestino = "../../Servidor/Vista//img/perfiles/" . $nombreArchivo;
+
+            // Asegurarse de que la carpeta existe
+            if (!file_exists("../../Servidor/Vista//img/perfiles/")) {
+                mkdir("../../Servidor/Vista//img/perfiles/", 0777, true); // Crear carpeta si no existe
+            }
+
+
+            // Mover el archivo a la carpeta de destino
+            if (move_uploaded_file($rutaTemporal, $rutaDestino)) {
+                // Guardar solo el nombre del archivo en la base de datos
+                $img_perfil = $nombreArchivo;
+            } else {
+                echo json_encode(['error' => 'Hubo un error al subir la imagen']);
+                exit;
+            }
         }
 
         $clave_hash = password_hash($clave, PASSWORD_DEFAULT);
@@ -104,7 +118,6 @@ try {
         echo json_encode(['success' => 'Perfil actualizado correctamente']);
         exit;
     }
-
 } catch (Exception $e) {
     echo json_encode(['error' => 'Error interno: ' . $e->getMessage()]);
 }
